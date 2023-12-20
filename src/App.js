@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import RegisterPage from './RegisterPage';
+import Home from './Home';
 
-function App() {
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null); // State to hold the user ID
+
+  const handleLogin = (userId) => {
+    setIsLoggedIn(true);
+    setUserId(userId); // Set the user ID upon successful login
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {isLoggedIn ? (
+        <Home userId={userId} /> // Pass the userId as a prop to Home
+      ) : (
+        <RegisterPage onLoginSuccess={handleLogin} />
+      )}
     </div>
   );
-}
+};
 
 export default App;
