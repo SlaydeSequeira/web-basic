@@ -1,0 +1,34 @@
+/* Appropriate container styles for the chat messages */
+#chat-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Styles for the left message (LM) */
+  .LM-container {
+    align-self: flex-start;
+    background-color: #e1e1e1;
+    max-width: 70%;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 8px;
+  }
+  
+  /* Styles for the right message (RM) */
+  .RM-container {
+    align-self: flex-end;
+    background-color: #4caf50;
+    color: #fff;
+    max-width: 70%;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 8px;
+  }
+  
+  /* Clearfix to handle float issues if any */
+  .clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  

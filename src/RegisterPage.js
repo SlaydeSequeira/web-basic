@@ -1,3 +1,5 @@
+// RegisterPage.js
+
 import React, { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
@@ -18,31 +20,29 @@ const RegisterPage = ({ onLoginSuccess }) => {
     e.preventDefault();
 
     try {
-      const auth = getAuth(); // Get the Auth instance after Firebase initialization
+      const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      // User exists in Firebase auth - handle successful login
       const user = userCredential.user;
 
-      // Update the user status in Realtime Database
-      const db = getDatabase(); // Access the database instance
+      const db = getDatabase();
       const userStatusRef = ref(db, `MyUsers/${user.uid}/status`);
       await set(userStatusRef, 'online');
-      onLoginSuccess();
-      console.log('User exists:', user);
+
+      // Pass the user ID to the onLoginSuccess callback
+      onLoginSuccess(user.uid);
+
       // Redirect or perform actions for successful login
+      console.log('User exists:', user);
     } catch (error) {
       if (error.code === 'auth/user-not-found') {
-        // User does not exist in Firebase auth
         console.log('User does not exist.');
         // Handle accordingly - show message or take necessary actions
       } else {
-        // Other error occurred during sign-in attempt
         console.error('Error:', error);
         // Handle other errors - show error message or take necessary actions
       }
     }
   };
-
 
   return (
     <div className="register-container">

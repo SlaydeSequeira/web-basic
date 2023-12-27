@@ -1,0 +1,12 @@
+.message-container {
+    display: flex;
+  }
+  
+  .user-list {
+    flex: 1;
+  }
+  
+  .messages {
+    flex: 2;
+  }
+  
