@@ -9,7 +9,7 @@ import './Chat.css';
 const Text = ({ id1, id2, username, imageURL }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
-
+  console.log(username,imageURL);
   const fetchMessages = async () => {
     try {
       const snapshot = await firebase.database().ref('Chats').once('value');
@@ -59,14 +59,19 @@ const Text = ({ id1, id2, username, imageURL }) => {
   }, [id1, id2]);
 
   return (
+<div style={{ backgroundColor: '#ffffe6', border: '1px solid black' }}>
+      <div style={{display:'flex',backgroundColor:'#4caf50',alignItems:'center'}}>
+      <img src={imageURL} style={{ width: '30px', height: '30px',marginRight:'30px',marginLeft:'30px'}}  />
+      <h4>{username}</h4>
+      </div>
     <div
       id="chat-container"
       className="clearfix"
       style={{
-        margin: '20px',
+        margin: '10px',
         padding: '10px',
         position: 'relative',
-        minHeight: '100vh',
+        minHeight: '92vh',
       }}
     >
       {messages.map((message) => {
@@ -98,6 +103,7 @@ const Text = ({ id1, id2, username, imageURL }) => {
           Send
         </button>
       </div>
+    </div>
     </div>
   );
 };

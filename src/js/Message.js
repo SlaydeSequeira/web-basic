@@ -65,15 +65,21 @@ const Message = ({ uid }) => {
 
   return (
     <div className="message-container">
-      <div className="user-list">
-        <h2>Usernames:</h2>
+      <div className="user-list" style={{backgroundColor:'#8c8c8c'}}>
+        <h2>Chats </h2>
         <ul>
           {uidData.map((item, index) => (
-            <li key={index} onClick={() => handleListItemClick(item.id)}>
-              Username: {item.username}
+            <li style={{backgroundColor:'#bfbfbf'}} key={index} onClick={() => handleListItemClick(item.id)}>
+              <div style={{borderRadius:'100px', width: '50px', height: '50px' }}>
               {item.imageURL && (
-                <img src={item.imageURL} alt={item.imageURL} style={{ width: '50px', height: '50px' }} />
-              )}
+                <img
+  src={item.imageURL || 'https://clipground.com/images/my-profile-icon-clipart-2.jpg'}
+  alt={item.imageURL || 'Placeholder Image'}
+  style={{ width: '50px', height: '50px', borderRadius: '100px' }}
+/>
+              )}              </div>
+
+              <h4 style={{marginLeft:'20px'}}>{item.username}</h4>
             </li>
           ))}
         </ul>
