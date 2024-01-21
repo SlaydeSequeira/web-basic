@@ -9,18 +9,15 @@ const Message = ({ uid }) => {
   const [uidData, setUidData] = useState([]);
   const [messages, setMessages] = useState([]);
   const [selectedItemId, setSelectedItemId] = useState(null);
-
   useEffect(() => {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     } else {
       firebase.app();
     }
-
     const fetchUidData = firebase.database().ref(`ChatList/${uid}`).once('value');
     const fetchUserData = firebase.database().ref('MyUsers').once('value');
     const fetchMessages = firebase.database().ref(`ChatList/${uid}/stuff i need`).once('value');
-
     Promise.all([fetchUidData, fetchUserData, fetchMessages])
       .then(([uidSnapshot, userSnapshot, messagesSnapshot]) => {
         const fetchedUidData = [];
